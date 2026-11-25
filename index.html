@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AirWatch - Academic & Technical Poster (ITSOEH)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-navy: #0c3b5e;
+      --accent-teal: #147a8c;
+      --bg-light: #e6eff4;
+      --card-bg: #ffffff;
+      --text-dark: #1f2933;
+      --text-muted: #52606d;
+      --highlight-bg: #f0f8fa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #1e293b;
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-width: 320px;
+    }
+
+    /* Barra superior de herramientas */
+    .toolbar {
+      width: 100%;
+      max-width: 1440px;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 14px 24px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .toolbar-info {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
+    .btn {
+      background: var(--accent-teal);
+      color: white;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: #0e5a68;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .upload-panel {
+      display: none;
+      width: 100%;
+      max-width: 1440px;
+      margin: -10px 0 16px;
+      padding: 12px 16px;
+      background: #fff;
+      border: 1px solid #bfd7e4;
+      border-radius: 8px;
+      color: var(--primary-navy);
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .upload-panel.is-open {
+      display: flex;
+    }
+
+    .upload-panel button {
+      border: 1px solid #bfd7e4;
+      border-radius: 5px;
+      background: #f4f9fb;
+      color: var(--primary-navy);
+      padding: 7px 10px;
+      font: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .upload-panel button:hover {
+      background: #e1f1f5;
+    }
+
+    /* Contenedor principal del Cartel */
+    .poster {
+      width: min(100%, 1440px);
+      background-color: var(--bg-light);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ENCABEZADO INSTITUCIONAL */
+    .poster-header {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f7fa 100%);
+      border-bottom: 6px solid var(--primary-navy);
+      padding: 22px 32px;
+      display: grid;
+      grid-template-columns: 220px 1fr 220px;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .itsoeh-badge {
+      border: 3px solid var(--primary-navy);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: #fff;
+    }
+
+    .itsoeh-badge h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary-navy);
+      letter-spacing: 1px;
+    }
+
+    .itsoeh-badge p {
+      font-size: 0.63rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    .header-center {
+      text-align: center;
+    }
+
+    .project-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.45rem;
+      font-weight: 800;
+      color: var(--primary-navy);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .project-subtitle {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--accent-teal);
+      margin-bottom: 12px;
+    }
+
+    .authors-grid {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .author-card {
+      background: #e2eef4;
+      border: 1px solid #bfd7e4;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+    }
+
+    .author-card strong {
+      display: block;
+      color: var(--primary-navy);
+      font-weight: 700;
+    }
+
+    .author-card span {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+    }
+
+    .institution-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+      margin-top: 6px;
+    }
+
+    .career-badge {
+      background: var(--primary-navy);
+      color: #ffffff;
+      padding: 14px 16px;
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .career-badge .program {
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .career-badge .semester {
+      margin-top: 6px;
+      font-size: 0.74rem;
+      background: var(--accent-teal);
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* CUERPO DE 3 COLUMNAS */
+    .poster-body {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      padding: 22px 28px;
+      flex: 1;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(12, 59, 94, 0.08);
+      overflow: hidden;
+      border: 1px solid #d5e2ea;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-header {
+      background: var(--primary-navy);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 9px 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .section-content {
+      padding: 14px 16px;
+      font-size: 0.89rem;
+      line-height: 1.48;
+      text-align: justify;
+    }
+
+    .section-content p + p {
+      margin-top: 9px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bullet-list li {
+      padding-left: 16px;
+      position: relative;
+      text-align: left;
+    }
+
+    .bullet-list li::before {
+      content: "▸";
+      color: var(--accent-teal);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .bullet-list strong {
+      color: var(--primary-navy);
+    }
+
+    /* TARJETAS DE NORMATIVAS */
+    .standards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .standard-box {
+      background: var(--highlight-bg);
+      border-left: 4px solid var(--accent-teal);
+      padding: 9px 12px;
+      border-radius: 6px;
+      text-align: left;
+    }
+
+    .standard-box h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      color: var(--primary-navy);
+      margin-bottom: 3px;
+    }
+
+    .standard-box p {
+      font-size: 0.81rem;
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* PROTOTIPO IOT & ARQUITECTURA */
+    .iot-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .iot-chip {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .iot-chip strong {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+    }
+
+    .iot-chip span {
+      font-size: 0.8rem;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    /* DIAGRAMA DE METODOLOGÍA */
+    .method-diagram {
+      margin-top: 12px;
+      background: #f4f9fb;
+      border: 1px solid #cce0ea;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .method-title-pill {
+      background: var(--primary-navy);
+      color: #fff;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 7px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .method-branches {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .branch-box {
+      background: #fff;
+      border: 1.5px solid var(--accent-teal);
+      border-radius: 8px;
+      padding: 9px;
+    }
+
+    .branch-box h4 {
+      background: var(--accent-teal);
+      color: #fff;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 4px;
+      border-radius: 5px;
+      margin-bottom: 7px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .branch-step {
+      background: #fdf6ec;
+      border: 1px solid #f0dec4;
+      border-radius: 5px;
+      padding: 5px 7px;
+      font-size: 0.76rem;
+      margin-bottom: 5px;
+      text-align: left;
+      font-weight: 600;
+      color: #334e68;
+    }
+
+    .method-result-pill {
+      margin-top: 8px;
+      background: var(--primary-navy);
+      color: #fff;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .figure-caption {
+      text-align: center;
+      font-size: 0.77rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* CONTENEDORES INTERACTIVOS PARA IMÁGENES Y VIDEO */
+    .media-slot {
+      margin-top: 8px;
+      border: 2px dashed var(--accent-teal);
+      background: #f0f8fa;
+      border-radius: 8px;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .media-slot:hover {
+      background: #e1f1f5;
+    }
+
+    .media-slot img,
+    .media-slot video {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      max-height: 270px;
+      object-fit: contain;
+      display: none;
+    }
+
+    .media-slot img {
+      cursor: zoom-in;
+    }
+
+    .media-slot video {
+      cursor: auto;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+    }
+
+    .slot-placeholder {
+      text-align: center;
+      padding: 16px;
+      color: var(--primary-navy);
+    }
+
+    .slot-placeholder span {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .slot-placeholder small {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+    }
+
+    /* BLOQUE INFERIOR DE CÓDIGO QR Y ENLACE WEB */
+    .qr-footer-box {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 14px;
+      align-items: center;
+      background: #f4f9fb;
+      border: 1.5px solid #bfd7e4;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .qr-slot {
+      width: 135px;
+      height: 135px;
+      border: 2px dashed var(--primary-navy);
+      background: #ffffff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+      padding: 4px;
+    }
+
+    .qr-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .qr-placeholder {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.25;
+    }
+
+    .qr-info h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      color: var(--primary-navy);
+      margin-bottom: 4px;
+    }
+
+    .qr-info p {
+      font-size: 0.8rem;
+      color: var(--text-dark);
+      text-align: left;
+      margin-bottom: 6px;
+    }
+
+    .web-url-badge {
+      display: inline-block;
+      background: var(--primary-navy);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .web-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .web-link:hover {
+      text-decoration: underline;
+    }
+
+    .web-url-badge,
+    .web-url-badge:hover,
+    .web-url-badge:visited,
+    .web-url-badge:focus {
+      color: #ffffff !important;
+      text-decoration: none !important;
+    }
+
+    .lightbox {
+      width: min(96vw, 1400px);
+      max-width: none;
+      max-height: 94vh;
+      padding: 12px;
+      margin: auto;
+      border: 0;
+      border-radius: 10px;
+      background: #0f172a;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .lightbox::backdrop {
+      background: rgba(15, 23, 42, 0.88);
+    }
+
+    .lightbox img {
+      display: block;
+      max-width: 100%;
+      max-height: calc(94vh - 24px);
+      margin: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--primary-navy);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .references-list {
+      font-size: 0.75rem;
+      line-height: 1.38;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: left;
+    }
+
+    @media (max-width: 1050px) {
+      body {
+        padding: 12px;
+      }
+
+      .poster-header {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .logo-box:last-child {
+        max-width: 360px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .poster-body {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 18px;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 8px;
+      }
+
+      .toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px;
+      }
+
+      .toolbar-actions {
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .poster-header {
+        padding: 18px 14px;
+      }
+
+      .project-title {
+        font-size: clamp(1.6rem, 8vw, 2.3rem);
+      }
+
+      .project-subtitle {
+        font-size: 0.9rem;
+      }
+
+      .authors-grid {
+        gap: 8px;
+      }
+
+      .author-card {
+        width: 100%;
+      }
+
+      .institution-meta {
+        overflow-wrap: anywhere;
+      }
+
+      .poster-body {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+
+      .section-content {
+        padding: 12px;
+      }
+
+      .qr-footer-box {
+        grid-template-columns: 110px 1fr;
+        gap: 10px;
+      }
+
+      .qr-slot {
+        width: 105px;
+        height: 105px;
+      }
+
+      .web-url-badge {
+        overflow-wrap: anywhere;
+      }
+    }
+
+    /* REGLAS DE IMPRESIÓN / DESCARGA PDF */
+    @media print {
+      @page {
+        size: A2 portrait;
+        margin: 8mm;
+      }
+      body {
+        display: block;
+        background: #ffffff;
+        padding: 0;
+      }
+      .toolbar,
+      .upload-panel,
+      .lightbox {
+        display: none !important;
+      }
+      .poster {
+        box-shadow: none;
+        width: 100%;
+        min-height: 0;
+        overflow: visible;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .poster-header {
+        grid-template-columns: 150px 1fr 180px;
+        padding: 14px;
+        gap: 12px;
+      }
+      .project-title {
+        font-size: 1.8rem;
+      }
+      .poster-body {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        padding: 14px;
+      }
+      .column {
+        gap: 10px;
+      }
+      .section-card {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+      .section-header {
+        font-size: 0.85rem;
+        padding: 7px 10px;
+      }
+      .section-content {
+        padding: 9px;
+        font-size: 0.72rem;
+      }
+      .media-slot {
+        min-height: 0;
+        cursor: default;
+      }
+      .media-slot,
+      .qr-slot {
+        border: 1px solid #cbd5e1;
+      }
+      .media-slot img,
+      .media-slot video {
+        max-height: 190px;
+      }
+      .slot-placeholder {
+        display: none !important;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra superior de acciones -->
+  <div class="toolbar">
+    <div class="toolbar-info">
+      <strong>AirWatch · Cartel académico interactivo</strong><br>
+      Los recursos del proyecto se cargan automáticamente. Puedes reemplazarlos para probar en tiempo real.
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn" id="download-pdf" type="button" onclick="downloadPosterPDF()">⬇ Descargar PDF</button>
+    </div>
+  </div>
+
+
+  <!-- CARTEL ACADÉMICO -->
+  <main class="poster" id="poster">
+
+    <!-- ENCABEZADO INSTITUCIONAL -->
+    <header class="poster-header">
+      <div class="logo-box">
+        <div class="itsoeh-badge">
+          <h3>ITSOEH</h3>
+          <p>Instituto Tecnológico Superior del Occidente del Estado de Hidalgo</p>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <h1 class="project-title">AirWatch — IoT Water & Air Quality System</h1>
+        <div class="project-subtitle">Real-Time Environmental Telemetry, Web E-Commerce & Ink Application Flow</div>
+
+        <div class="authors-grid">
+          <div class="author-card">
+            <strong>Gustavo Barrera Martínez</strong>
+            <span>230110063 · </span>
+            <span>230110063@itsoeh.edu.mx</span>
+          </div>
+          <div class="author-card">
+            <strong>Leilany Aislinn Sanchez Reyes</strong>
+            <span>230110163 · </span>
+            <span>230110163@itsoeh.edu.mx</span>
+          </div>
+          <div class="author-card">
+            <strong>Carmen Anahí Cornejo López</strong>
+            <span>230110084 · </span>
+            <span>230110084@itsoeh.edu.mx</span>
+          </div>
+        </div>
+
+        <div class="institution-meta">
+          Paseo del Agrarismo 2000, Carr. Mixquiahuala - Tula, Mixquiahuala de Juárez, Hidalgo, C.P. 42700 · Official Web: <a class="web-link" href="https://pag-integrador.pages.dev/" target="_blank" rel="noopener noreferrer"><strong>https://pag-integrador.pages.dev/</strong></a>
+        </div>
+      </div>
+
+      <div class="logo-box">
+        <div class="career-badge">
+          <div class="program">Ing. en Tecnologías de la Información y Comunicaciones</div>
+          <div class="semester">7th Semester · Networks & IoT</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CUERPO DE 3 COLUMNAS -->
+    <div class="poster-body">
+
+      <!-- COLUMNA 1: ABSTRACT, BACKGROUND, OBJECTIVE, NORMATIVAS -->
+      <div class="column">
+        <section class="section-card">
+          <div class="section-header">Abstract</div>
+          <div class="section-content">
+            <p>
+              <strong>AirWatch</strong> is an integrated Internet of Things (IoT) environmental monitoring ecosystem paired with an e-commerce web platform and mobile application flow (Ink), created to detect water and air pollutants in agricultural irrigation canals and urban zones in Mixquiahuala de Juárez, Hidalgo.
+            </p>
+            <p>
+              The architecture combines ESP32 multi-sensor hardware nodes, cloud time-series telemetry, automated alerts, and regulatory compliance under Mexican IT standards to deliver accessible, real-time environmental intelligence.
+            </p>
+          </div>
+        </section>
+
+        <section class="section-card">
+          <div class="section-header">Background & Problem</div>
+          <div class="section-content">
+            <ul class="bullet-list">
+              <li><strong>Canal Pollution:</strong> Irrigation channels in the Valle del Mezquital (such as El Bondho) receive untreated wastewater discharges containing heavy metals and organic contaminants.</li>
+              <li><strong>Delayed Detection:</strong> Conventional water quality testing relies on slow manual sampling, limiting timely response for farmers and local authorities.</li>
+              <li><strong>Lack of Accessible Kits:</strong> Modular, low-cost IoT monitoring hardware with integrated software support is scarce in regional agricultural communities.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section-card">
+          <div class="section-header">Objective</div>
+          <div class="section-content">
+            <p>
+              To design, build, and validate the <strong>AirWatch</strong> IoT hardware prototype, web e-commerce platform (<em>pag-integrador.pages.dev</em>), and Ink user application flow for continuous water and air quality monitoring in Mixquiahuala de Juárez, ensuring information security and service quality compliance.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECCIÓN DE NORMATIVAS -->
+        <section class="section-card" style="flex: 1;">
+          <div class="section-header">Regulatory Standards (Normativas)</div>
+          <div class="section-content">
+            <p>
+              Information security, telemetry integrity, and service governance in AirWatch are aligned with national Mexican standards:
+            </p>
+            <div class="standards-grid">
+              <div class="standard-box">
+                <h4>NMX-I-27001-NYCE-2015 (SGSI)</h4>
+                <p>Information Security Management System controls applied to protect user authentication, sensor API endpoints, cloud telemetry logs, and e-commerce transactions.</p>
+              </div>
+              <div class="standard-box">
+                <h4>NMX-I-321-NYCE-2017 (IT Service Management)</h4>
+                <p>Quality requirements for IT service delivery, incident response, sensor node availability, and continuous maintenance across subscription plans.</p>
+              </div>
+              <div class="standard-box">
+                <h4>Environmental Water Quality Guidelines</h4>
+                <p>Threshold calibration for pH, turbidity, TDS, and dissolved pollutants in agricultural irrigation channels based on CONAGUA benchmarks.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUMNA 2: PROTOTIPO IOT, METHODOLOGY, FLUJO DE USUARIO INK -->
+      <div class="column">
+        <section class="section-card">
+          <div class="section-header">IoT Prototype Architecture</div>
+          <div class="section-content">
+            <p>
+              The <strong>AirWatch IoT Prototype</strong> consists of a waterproof field telemetry node deployed at critical canal checkpoints (El Bondho, Mixquiahuala) to capture and transmit real-time environmental metrics.
+            </p>
+            <div class="iot-specs-grid">
+              <div class="iot-chip">
+                <strong>Microcontroller</strong>
+                <span>ESP32 Dual-Core Wi-Fi / BLE</span>
+              </div>
+              <div class="iot-chip">
+                <strong>Water Sensors</strong>
+                <span>pH, Turbidity, TDS & Temp</span>
+              </div>
+              <div class="iot-chip">
+                <strong>Air Quality Module</strong>
+                <span>MQ-135 / Gas & Particulate</span>
+              </div>
+              <div class="iot-chip">
+                <strong>Cloud & Protocols</strong>
+                <span>MQTT / HTTPS REST API</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card">
+          <div class="section-header">Methodology</div>
+          <div class="section-content">
+            <p>
+              An <strong>Evolutionary Prototyping</strong> and <strong>User-Centered Design (UCD)</strong> approach was executed across hardware firmware, Ink UX workflows, and full-stack web deployment.
+            </p>
+            <div class="method-diagram">
+              <div class="method-title-pill">Methodologies Used in AirWatch</div>
+              <div class="method-branches">
+                <div class="branch-box">
+                  <h4>UX/UI & Web Platform</h4>
+                  <div class="branch-step">Evolutionary Prototyping</div>
+                  <div class="branch-step">Ink User Journey Mapping</div>
+                  <div class="branch-step">E-Commerce & Dashboard UI</div>
+                  <div class="branch-step">NMX-I-27001 / 321 Controls</div>
+                </div>
+                <div class="branch-box">
+                  <h4>IoT Hardware & Telemetry</h4>
+                  <div class="branch-step">ESP32 Multi-Sensor Fusion</div>
+                  <div class="branch-step">Real-Time Cloud Sync</div>
+                  <div class="branch-step">Threshold Alert Engine</div>
+                  <div class="branch-step">Canal Field Validation</div>
+                </div>
+              </div>
+              <div class="method-result-pill">
+                Result: End-to-end IoT monitoring hardware, Ink app flow & commercial web platform.
+              </div>
+            </div>
+            <div class="figure-caption">Figure 1. Evolutionary methodology and IoT architecture in AirWatch.</div>
+          </div>
+        </section>
+
+        <!-- FLUJO DE USUARIO DE LA APLICACIÓN INK -->
+        <section class="section-card" style="flex: 1;">
+          <div class="section-header">Ink Application User Flow</div>
+          <div class="section-content">
+            <p>
+              The interactive <strong>Ink</strong> user flow structures onboarding, QR sensor pairing, live canal telemetry inspection, and alert management.
+            </p>
+            <div class="media-slot" data-media-slot="ink">
+              <input type="file" id="input-ink" accept="image/*" style="display:none" onchange="loadImage(event, 'img-ink', 'ph-ink')">
+              <img id="img-ink" src="./video/flujo_de_usuario.jpeg" alt="Flujo de usuario de la aplicación Ink">
+              <div class="slot-placeholder" id="ph-ink">
+                <span>+ Insertar Flujo de Usuario (Aplicación Ink)</span>
+                <small>Haz clic aquí para subir la captura del flujo de usuario</small>
+              </div>
+            </div>
+            <div class="figure-caption">Figure 2. AirWatch Ink application user flow diagram.</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUMNA 3: RESULTS (WEB + VIDEO), QR CODE, CONCLUSION, REFERENCES -->
+      <div class="column">
+        <section class="section-card">
+          <div class="section-header">Results: Web Platform & Prototype Video</div>
+          <div class="section-content">
+            <p>
+              <strong>Web E-Commerce & Monitoring Portal:</strong> Deployed at <a class="web-link" href="https://pag-integrador.pages.dev/" target="_blank" rel="noopener noreferrer"><em>pag-integrador.pages.dev</em></a>, enabling users to explore hardware kits, service plans, and live sensor dashboards.
+            </p>
+
+            <!-- CAPTURA DE LA PÁGINA WEB -->
+            <div class="media-slot" data-media-slot="web">
+              <input type="file" id="input-web" accept="image/*" style="display:none" onchange="loadImage(event, 'img-web', 'ph-web')">
+              <img id="img-web" src="./video/pagina_web.png" alt="Captura del portal web de AirWatch">
+              <div class="slot-placeholder" id="ph-web">
+                <span>+ Insertar Captura de la Página Web</span>
+                <small>Haz clic aquí para subir la captura de pag-integrador.pages.dev</small>
+              </div>
+            </div>
+            <div class="figure-caption">Figure 3. AirWatch official web portal and e-commerce interface.</div>
+
+            <p style="margin-top: 12px;">
+              <strong>IoT Prototype Field Demonstration Video:</strong> Live hardware assembly, sensor calibration, and real-time data transmission test.
+            </p>
+
+            <!-- RECUADRO PARA VIDEO DEL PROTOTIPO -->
+            <div class="media-slot" id="video-slot" data-media-slot="video">
+              <input type="file" id="input-video" accept="video/*" style="display:none" onchange="loadVideo(event)">
+              <video id="vid-proto" controls preload="metadata" playsinline>
+                <source src="./video/airwatch.mp4" type="video/mp4">
+                Tu navegador no puede reproducir video MP4. Usa “Cargar medios” para elegir otro archivo.
+              </video>
+              <div class="slot-placeholder" id="ph-video">
+                <span>+ Insertar Video del Prototipo IoT</span>
+                <small>Haz clic aquí para cargar el video (.mp4 / .webm)</small>
+              </div>
+            </div>
+            <div class="figure-caption">Figure 4. Functional demonstration video of the AirWatch IoT prototype.</div>
+          </div>
+        </section>
+
+        <!-- ACCESO WEB Y CÓDIGO QR -->
+        <section class="section-card">
+          <div class="section-header">Web Access & QR Redirection</div>
+          <div class="section-content">
+            <div class="qr-footer-box">
+              <div class="qr-slot" data-media-slot="qr">
+                <input type="file" id="input-qr" accept="image/*" style="display:none" onchange="loadImage(event, 'img-qr', 'ph-qr')">
+                <img id="img-qr" alt="QR code linking to the official AirWatch website" style="display:none">
+                <div class="qr-placeholder" id="ph-qr">
+                  Generating<br>QR code…
+                </div>
+              </div>
+              <div class="qr-info">
+                <h4>Scan to Visit AirWatch</h4>
+                <p>
+                  Access the web portal, technical specifications, and real-time environmental monitoring demo:
+                </p>
+                <a class="web-url-badge web-link" href="https://pag-integrador.pages.dev/" target="_blank" rel="noopener noreferrer">Open Official Website ↗</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONCLUSION -->
+        <section class="section-card">
+          <div class="section-header">Conclusion</div>
+          <div class="section-content">
+            <p>
+              <strong>AirWatch</strong> successfully integrated an ESP32 IoT environmental monitoring prototype, an intuitive Ink user flow, and a functional e-commerce web portal aligned with <strong>NMX-I-27001-NYCE-2015</strong> and <strong>NMX-I-321-NYCE-2017</strong>. Field validation in Mixquiahuala de Juárez confirms its capability to provide timely water and air pollution alerts with scalable commercial adoption.
+            </p>
+          </div>
+        </section>
+
+        <!-- REFERENCES -->
+        <section class="section-card" style="flex: 1;">
+          <div class="section-header">References</div>
+          <div class="section-content">
+            <div class="references-list">
+              <div>[1] Secretaría de Economía. (2015). <em>NMX-I-27001-NYCE-2015: Sistemas de Gestión de la Seguridad de la Información</em>.</div>
+              <div>[2] Secretaría de Economía. (2017). <em>NMX-I-321-NYCE-2017: Gestión de Servicios de Tecnologías de la Información</em>.</div>
+              <div>[3] Espressif Systems. (2025). <em>ESP32 Technical Reference & IoT Sensor Integration</em>.</div>
+              <div>[4] CONAGUA. (2024). <em>Monitoreo de calidad del agua en el Valle del Mezquital, Hidalgo</em>.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+  <dialog class="lightbox" id="lightbox" aria-label="Vista ampliada de imagen">
+    <button class="lightbox-close" type="button" aria-label="Cerrar imagen ampliada">×</button>
+    <img id="lightbox-image" alt="">
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+  <script>
+    const posterUrl = 'https://pag-integrador.pages.dev/';
+
+    async function downloadPosterPDF() {
+      const poster = document.getElementById('poster');
+      const toolbar = document.querySelector('.toolbar');
+      const downloadButton = document.getElementById('download-pdf');
+      const lightbox = document.getElementById('lightbox');
+      const toolbarDisplay = toolbar.style.display;
+      const buttonDisabled = downloadButton.disabled;
+      const lightboxWasOpen = lightbox.open;
+      const videoStates = [];
+
+      toolbar.style.display = 'none';
+      downloadButton.disabled = true;
+      if (lightboxWasOpen) lightbox.close();
+
+      try {
+        if (typeof window.html2canvas !== 'function' || !window.jspdf?.jsPDF) {
+          throw new Error('No se pudieron cargar las bibliotecas necesarias para exportar el PDF.');
+        }
+
+        for (const video of poster.querySelectorAll('video')) {
+          const placeholder = video.parentElement.querySelector('.slot-placeholder');
+          const state = {
+            video,
+            placeholder,
+            display: video.style.display,
+            placeholderDisplay: placeholder ? placeholder.style.display : '',
+            frame: null
+          };
+          videoStates.push(state);
+
+          if (video.readyState >= 2 && video.videoWidth > 0 && video.videoHeight > 0) {
+            const frameCanvas = document.createElement('canvas');
+            frameCanvas.width = video.videoWidth;
+            frameCanvas.height = video.videoHeight;
+            frameCanvas.getContext('2d').drawImage(video, 0, 0, frameCanvas.width, frameCanvas.height);
+
+            const frame = document.createElement('img');
+            frame.alt = 'Fotograma actual del prototipo AirWatch';
+            frame.src = frameCanvas.toDataURL('image/png');
+            const bounds = video.getBoundingClientRect();
+            const frameWidth = bounds.width || video.parentElement.clientWidth;
+            const frameHeight = bounds.height || frameWidth * video.videoHeight / video.videoWidth;
+            frame.style.cssText = `display:block;width:${frameWidth}px;height:${frameHeight}px;max-width:100%;max-height:270px;object-fit:contain`;
+            video.before(frame);
+            video.style.display = 'none';
+            if (placeholder) placeholder.style.display = 'none';
+            state.frame = frame;
+            await frame.decode();
+          } else {
+            video.style.display = 'none';
+            if (placeholder) placeholder.style.display = 'block';
+          }
+        }
+
+        await document.fonts.ready;
+        const posterImages = [...poster.querySelectorAll('img')].filter((img) => img.complete && img.naturalWidth > 0);
+        await Promise.all(posterImages.map((img) => img.decode()));
+
+        const canvas = await window.html2canvas(poster, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#e6eff4'
+        });
+        const pdf = new window.jspdf.jsPDF({
+          orientation: 'portrait',
+          unit: 'px',
+          format: [canvas.width, canvas.height]
+        });
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
+        pdf.save('Cartel_AirWatch_ITSOEH.pdf');
+      } catch (error) {
+        console.error('Error al exportar el cartel a PDF:', error);
+        alert(error instanceof Error ? error.message : 'No se pudo generar el PDF. Inténtalo nuevamente.');
+      } finally {
+        videoStates.forEach(({ video, placeholder, display, placeholderDisplay, frame }) => {
+          if (frame) frame.remove();
+          video.style.display = display;
+          if (placeholder) placeholder.style.display = placeholderDisplay;
+        });
+        toolbar.style.display = toolbarDisplay;
+        downloadButton.disabled = buttonDisabled;
+        if (lightboxWasOpen) lightbox.showModal();
+      }
+    }
+
+    function showImage(img, placeholder) {
+      img.style.display = 'block';
+      if (placeholder) placeholder.style.display = 'none';
+    }
+
+    function hideImage(img, placeholder) {
+      img.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'block';
+    }
+
+    function loadImage(event, imgId, placeholderId) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const img = document.getElementById(imgId);
+      const placeholder = document.getElementById(placeholderId);
+      const oldUrl = img.dataset.objectUrl;
+      if (oldUrl) URL.revokeObjectURL(oldUrl);
+      const objectUrl = URL.createObjectURL(file);
+      img.dataset.objectUrl = objectUrl;
+      img.src = objectUrl;
+      showImage(img, placeholder);
+    }
+
+    function loadVideo(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const video = document.getElementById('vid-proto');
+      const placeholder = document.getElementById('ph-video');
+      if (video.dataset.objectUrl) URL.revokeObjectURL(video.dataset.objectUrl);
+      placeholder.querySelector('span').textContent = 'Cargando video…';
+      placeholder.querySelector('small').textContent = 'Espera a que el archivo esté listo para reproducirse.';
+      placeholder.style.display = 'block';
+      video.style.display = 'none';
+      video.dataset.objectUrl = URL.createObjectURL(file);
+      video.src = video.dataset.objectUrl;
+      video.load();
+    }
+
+    document.querySelectorAll('.media-slot img').forEach((img) => {
+      const placeholder = img.closest('.media-slot').querySelector('.slot-placeholder');
+      img.addEventListener('load', () => showImage(img, placeholder));
+      img.addEventListener('error', () => hideImage(img, placeholder));
+      if (img.complete && img.naturalWidth) showImage(img, placeholder);
+    });
+
+    const video = document.getElementById('vid-proto');
+    const videoPlaceholder = document.getElementById('ph-video');
+    function showVideo() {
+      video.style.display = 'block';
+      videoPlaceholder.style.display = 'none';
+    }
+    function showVideoError() {
+      video.style.display = 'none';
+      videoPlaceholder.querySelector('span').textContent = 'Video no disponible';
+      videoPlaceholder.querySelector('small').textContent = 'Usa “Cargar medios” para seleccionar un archivo MP4 o WebM.';
+      videoPlaceholder.style.display = 'block';
+    }
+    function showVideoLoading() {
+      videoPlaceholder.querySelector('span').textContent = 'Cargando video…';
+      videoPlaceholder.querySelector('small').textContent = 'Espera a que el archivo esté listo para reproducirse.';
+      videoPlaceholder.style.display = 'block';
+    }
+    video.addEventListener('loadstart', showVideoLoading);
+    video.addEventListener('loadedmetadata', showVideo);
+    video.addEventListener('error', showVideoError);
+    if (video.error) showVideoError();
+    else if (video.readyState >= 1) showVideo();
+    else if (video.networkState !== 0) showVideoLoading();
+
+    const qrImage = document.getElementById('img-qr');
+    const qrPlaceholder = document.getElementById('ph-qr');
+    qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=png&data=' + encodeURIComponent(posterUrl);
+    qrImage.addEventListener('load', () => showImage(qrImage, qrPlaceholder));
+    qrImage.addEventListener('error', () => {
+      qrImage.style.display = 'none';
+      qrPlaceholder.innerHTML = 'QR unavailable<br>use the direct link';
+      qrPlaceholder.style.display = 'block';
+    });
+    if (qrImage.complete && qrImage.naturalWidth) showImage(qrImage, qrPlaceholder);
+
+    const uploadPanel = document.getElementById('upload-panel');
+    const uploadToggle = document.getElementById('toggle-uploads');
+    if (uploadPanel && uploadToggle) {
+      uploadToggle.addEventListener('click', () => {
+        const isOpen = uploadPanel.classList.toggle('is-open');
+        uploadToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      uploadPanel.querySelectorAll('[data-input]').forEach((button) => {
+        button.addEventListener('click', () => document.getElementById(button.dataset.input).click());
+      });
+    }
+
+    document.querySelectorAll('[data-media-slot]').forEach((slot) => {
+      slot.addEventListener('click', (event) => {
+        if (event.target.closest('input[type="file"]')) return;
+        if (event.target.closest('video')) return;
+        if (event.target.closest('img') && event.target.closest('img').style.display === 'block') {
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImage = document.getElementById('lightbox-image');
+          lightboxImage.src = event.target.closest('img').src;
+          lightboxImage.alt = event.target.closest('img').alt;
+          lightbox.showModal();
+          return;
+        }
+        const input = slot.querySelector('input[type="file"]');
+        if (input) input.click();
+      });
+    });
+
+    document.getElementById('lightbox').addEventListener('click', (event) => {
+      if (event.target === event.currentTarget) event.currentTarget.close();
+    });
+    document.querySelector('.lightbox-close').addEventListener('click', () => {
+      document.getElementById('lightbox').close();
+    });
+  </script>
+</body>
+</html>
